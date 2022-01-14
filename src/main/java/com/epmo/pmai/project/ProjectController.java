@@ -42,6 +42,7 @@ public class ProjectController {
         }
         Project newProject = projectService.createNewProject(modelMapper.map(outlineForm,Project.class));
         return "redirect:/project/outline";
+        tst
     }
     @GetMapping("/project/register")
     public String registerForm(Model model) {
