@@ -26,4 +26,8 @@ public class OutlineForm {
     //담당자
     private String manager;
 
+    private String shortDescription;
+
+    private String fullDescription;
+
 }

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: head"></head>
+<body class="bg-light">
+<div th:replace="fragments.html :: main-nav"></div>
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>정보화 사업 개설</h2>
+    </div>
+    <div class="row justify-content-center">
+        <form class="needs-validation col-sm-10" th:action="@{/new-project}" th:object="${projectForm}"
+              method="post" novalidate>
+            <div class="form-group">
+                <label for="path">정보화사업 이름</label>
+                <input id="path" type="text" th:field="*{title}" class="form-control"
+                       placeholder="OPEN API시스템 구축" aria-describedby="pathHelp" required min="2" max="20">
+                <small id="pathHelp" class="form-text text-muted">
+                    사업 명을 적어주세요
+                </small>
+                <small class="invalid-feedback">사업 명을 입력하세요.</small>
+                <small class="form-text text-danger" th:if="${#fields.hasErrors('title')}"
+                       th:errors="*{title}">Path error</small>
+            </div>
+            <div class="form-group">
+                <label for="totalAmount">사업비</label>
+                <input id="totalAmount" type="text" th:field="*{totalAmount}" class="form-control"
+                       placeholder="사업비(원)" aria-describedby="totalAmountHelp" required max="50">
+                <small id="totalAmountHelp" class="form-text text-muted">
+                </small>
+                <small class="invalid-feedback">사업비</small>
+                <small class="form-text text-danger" th:if="${#fields.hasErrors('totalAmount')}"
+                       th:errors="*{totalAmount}">Title error</small>
+            </div>
+
+            <div class="form-group">
+                <label for="shortDescription">짧은 소개</label>
+                <textarea id="shortDescription" type="textarea" th:field="*{shortDescription}" class="form-control"
+                       placeholder="프로젝트를 짧게 소개해 주세요" aria-describedby="shortDescription" required maxlength="100">
+                </textarea>
+                <small id="shortDescriptionHelp" class="form-text text-muted">
+                    255자 이내로 짧은 소개해 주세요.
+                </small>
+                <small class="invalid-feedback">짧은 소개를 입력하세요</small>
+                <small class="form-text text-danger" th:if="${#fields.hasErrors('shortDescription')}"
+                       th:errors="*{shortDescription}">ShortDescription error</small>
+            </div>
+            <div class="form-group">
+                <label for="fullDescription">상세 소개</label>
+                <textarea id="fullDescription" type="textarea" th:field="*{fullDescription}" class="editor form-control"
+                       placeholder="스터디를 자세하게 소개해 주세요" aria-describedby="fullDescription" required>
+                </textarea>
+                <small id="fullDescription" class="form-text text-muted">
+                   프로젝트 설명을 적어주세요
+                </small>
+                <small class="invalid-feedback">스터디 경로를 입력하세요.</small>
+                <small class="form-text text-danger" th:if="${#fields.hasErrors('fullDescription')}"
+                       th:errors="*{fullDescription}">ShortDescription error</small>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-block" type="submit" aria-describedby="submitHelp">
+                    스터디 만들기
+                </button>
+            </div>
+        </form>
+    </div>
+    <div th:replace="fragments.html :: footer"></div>
+</div>
+    <script th:replace="fragments.html :: tooltip"></script>
+    <script th:replace="fragments.html :: form-validation"></script>
+    <script th:replace="fragments.html :: editor-script"></script>
+</body>
+</html>

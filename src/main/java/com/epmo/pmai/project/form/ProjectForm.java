@@ -3,19 +3,25 @@ package com.epmo.pmai.project.form;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+
 @Data
 @RequiredArgsConstructor
 public class ProjectForm {
+
     private String title;
-    //부서
-    private String department;
+    // 총 금액
+    private Long totalAmount;
+
+    // 개발, 물품
+    @NotBlank
+    private String projectType;
+
     //담당자
     private String manager;
 
-    //팀장
-    private String teamLeader;
+    private String shortDescription;
 
-    //부서장
-    private String depLeader;
+    private String fullDescription;
 
 }

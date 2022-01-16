@@ -1,5 +1,7 @@
 package com.epmo.pmai.project;
 
+import com.epmo.pmai.project.form.ContentsForm;
+import com.epmo.pmai.project.form.MethodForm;
 import com.epmo.pmai.project.form.RegisterForm;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -23,9 +25,18 @@ public class ProjectService {
 
     public void updateRegister(Project project, RegisterForm registerForm) {
         //이름이 일치할 경우에 매핑
-        modelMapper.map(registerForm,project);
+        modelMapper.map(registerForm, project);
         repository.save(project);
     }
 
+    public void updateMethod(Project project, MethodForm methodForm) {
+        modelMapper.map(methodForm, project);
+        repository.save(project);
+    }
+
+    public void updateContents(Project project, ContentsForm contentsForm) {
+        modelMapper.map(contentsForm, project);
+        repository.save(project);
+    }
 
 }

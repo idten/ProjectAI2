@@ -16,6 +16,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Project {
+
     @Id
     @GeneratedValue
     private Long id;
@@ -36,6 +37,9 @@ public class Project {
     //담당자
     private String manager;
 
+    private String shortDescription;
+
+    private String fullDescription;
     //2. 발의자
     //부서
     private String department;
@@ -98,4 +102,5 @@ public class Project {
 
     @Column(unique = true)
     private String path;
+
 }

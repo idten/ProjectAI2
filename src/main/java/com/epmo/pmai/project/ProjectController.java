@@ -27,6 +27,21 @@ public class ProjectController {
     private final ProjectService projectService;
     private final ModelMapper modelMapper;
 
+    @GetMapping("/new-project")
+    public String newProjectForm(Model model){
+    //    model.addAttribute(account);
+        model.addAttribute(new ProjectForm());
+        return "project/form";
+    }
+    @PostMapping("/new-project")
+    public String newProjectSubmit(@Valid ProjectForm projectForm, Errors errors){
+        if(errors.hasErrors()){
+            return "study/form";
+        }
+        Project newProject = projectService.createNewProject(modelMapper.map(projectForm,Project.class));
+        return "redirect:/project/"+newProject.getId();
+    }
+
     @GetMapping("/project/outline")
     public String outlineForm(Model model) {
         //기본 입력페이지를 form으로 등록
@@ -50,6 +65,17 @@ public class ProjectController {
         return "project/register";
     }
 
+    @PostMapping("/project/register")
+    public String registerSubmit(@Valid RegisterForm registerForm, Errors errors){
+        if(errors.hasErrors()){
+            return "project/outline";
+        }
+        //Project project = projectReposotiry.findById
+      //  projectService.updateRegister(project)
+                //.createNewProject(modelMapper.map(outlineForm,Project.class));
+        return "redirect:/project/outline";
+
+    }
 
     @GetMapping("/project/contents")
     public String contentsForm(Model model) {
