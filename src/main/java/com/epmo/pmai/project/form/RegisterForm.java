@@ -1,6 +1,11 @@
 package com.epmo.pmai.project.form;
 
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
 //발의자 정보
+@Data
+@RequiredArgsConstructor
 public class RegisterForm {
 
     //2. 발의자

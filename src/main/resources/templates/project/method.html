@@ -7,7 +7,7 @@
 <div class="container">
     <div class="row mt-5 justify-content-center">
         <div class="col-2">
-            <div th:replace="fragments.html :: settings-menu(currentMenu='outline')"></div>
+            <div th:replace="fragments.html :: settings-menu(currentMenu='method')"></div>
         </div>
         <div class="col-8">
             <div th:if="${message}" class="alert alert-info alert-dismissible fade show mt-3" role="alert">
@@ -17,62 +17,62 @@
                 </button>
             </div>
             <div class="row">
-                <h2 class="col-sm-12" >1. 개요</h2>
+                <h2 class="col-sm-12" >3. 사업 내용</h2>
             </div>
             <div class="row mt-3">
-                <form class="col-sm-6" action="#" th:action="@{/project/outline}" th:object="${outlineForm}"
+                <form class="col-sm-6" action="#" th:action="@{/project/method}" th:object="${methodForm}"
                       method="post" novalidate>
 
                     <div class="form-group">
-                        <label for="title">사업명</label>
-                        <input id="title" type="text" th:field="*{title}" class="form-control"
-                               placeholder="사업명을 적어주세요" aria-describedby="bioHelp" required>
-                        <small id="titleHelp" class="form-text text-muted">
-                            사업명을 적어주세요
+                        <label for="selectionMethod">선정방법</label>
+                        <input id="selectionMethod" type="text" th:field="*{selectionMethod}" class="form-control"
+                               placeholder="업체선정방법- 선택" aria-describedby="selectionMethodHelp" required>
+                        <small id="selectionMethodHelp" class="form-text text-muted">
+                            업체선정 방법
                         </small>
-                        <small class="form-text text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('selectionMethod')}" th:errors="*{selectionMethod}">
                             조금 길어요.
                         </small>
                     </div>
                     <div class="form-group">
-                        <label for="projectType">사업종류</label>
-                        <input id="projectType" type="url" th:field="*{projectType}" class="form-control"
-                               placeholder="향후 콤보박스변환" aria-describedby="urlHelp" required>
-                        <small id="projectTypeHelp" class="form-text text-muted">
-                           물품/개발
+                        <label for="emergency">긴급여부</label>
+                        <input id="emergency" type="text" th:field="*{emergency}" class="form-control"
+                               placeholder="긴급수행여부" aria-describedby="emergencyHelp" required>
+                        <small id="emergencyHelp" class="form-text text-muted">
+                            긴급여부
                         </small>
-                        <small class="form-text text-danger" th:if="${#fields.hasErrors('projectType')}" th:errors="*{url}">
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('emergency')}" th:errors="*{emergency}">
                             에러입니다
                         </small>
                     </div>
                     <div class="form-group">
-                        <label for="url">담당자</label>
-                        <input id="url" type="url" th:field="*{manager}" class="form-control"
-                               placeholder="향후 콤보박스변환" aria-describedby="urlHelp" required>
-                        <small id="urlHelp" class="form-text text-muted">
-                            물품/개발
+                        <label for="emergencyBackground">긴급공고 사유</label>
+                        <input id="emergencyBackground" type="text" th:field="*{emergencyBackground}" class="form-control"
+                               placeholder="긴급공고 사유" aria-describedby="emergencyBackgroundHelp" required>
+                        <small id="emergencyBackgroundHelp" class="form-text text-muted">
+                            긴급공고 사유
                         </small>
-                        <small class="form-text text-danger" th:if="${#fields.hasErrors('projectType')}" th:errors="*{url}">
-                            옳바른 URL이 아닙니다. 예시처럼 입력해 주세요.
-                        </small>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="company">담당 EPMO</label>
-                        <input id="company" type="text" th:field="*{epmo}" class="form-control"
-                               placeholder="어떤 일을 하고 계신가요?" aria-describedby="occupationHelp" required>
-                        <small id="occupationHelp" class="form-text text-muted">
-                            개발자? 매니저? 취준생? 대표님?
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('emergencyBackground')}" th:errors="*{emergencyBackground}">
+                            긴급공고 사유
                         </small>
                     </div>
 
                     <div class="form-group">
-                        <label for="location">총금액(원)</label>
-                        <input id="location" type="text" th:field="*{totalAmount}" class="form-control"
-                               placeholder="금액입력"
-                               aria-describedby="locationdHelp" required>
-                        <small id="locationdHelp" class="form-text text-muted">
-                            주요 활동(사는 곳이나 직장을 다니는 곳 또는 놀러 다니는 곳) 지역의 도시 이름을 알려주세요.
+                        <label for="duration">소요 기간</label>
+                        <input id="duration" type="text" th:field="*{duration}" class="form-control"
+                               placeholder="소요기간" aria-describedby="durationHelp" required>
+                        <small id="durationHelp" class="form-text text-muted">
+                            소요기간
+                        </small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cooperationDepartment">협조부서</label>
+                        <input id="cooperationDepartment" type="text" th:field="*{cooperationDepartment}" class="form-control"
+                               placeholder="협조부서(여러개)"
+                               aria-describedby="cooperationDepartmentHelp" required>
+                        <small id="cooperationDepartmentHelp" class="form-text text-muted">
+                            협조 부서
                         </small>
                     </div>
                     <div class="form-group">

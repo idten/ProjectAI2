@@ -24,55 +24,54 @@
                       method="post" novalidate>
 
                     <div class="form-group">
-                        <label for="title">사업명</label>
-                        <input id="title" type="text" th:field="*{title}" class="form-control"
-                               placeholder="사업명을 적어주세요" aria-describedby="bioHelp" required>
-                        <small id="titleHelp" class="form-text text-muted">
-                            사업명을 적어주세요
+                        <label for="department">부서명</label>
+                        <input id="department" type="text" th:field="*{department}" class="form-control"
+                               placeholder="부서명" aria-describedby="departmentHelp" required>
+                        <small id="departmentHelp" class="form-text text-muted">
+                            부서명을 적어주세요
                         </small>
-                        <small class="form-text text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
-                            조금 길어요.
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('department')}" th:errors="*{department}">
+                            에러발생
                         </small>
                     </div>
                     <div class="form-group">
-                        <label for="projectType">사업종류</label>
-                        <input id="projectType" type="url" th:field="*{projectType}" class="form-control"
-                               placeholder="향후 콤보박스변환" aria-describedby="urlHelp" required>
-                        <small id="projectTypeHelp" class="form-text text-muted">
-                            물품/개발
+                        <label for="teamLeader">팀장</label>
+                        <input id="teamLeader" type="text" th:field="*{teamLeader}" class="form-control"
+                               placeholder="팀장" aria-describedby="teamLeader" required>
+                        <small id="teamLeaderHelp" class="form-text text-muted">
+                            팀장
                         </small>
-                        <small class="form-text text-danger" th:if="${#fields.hasErrors('projectType')}" th:errors="*{url}">
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('teamLeader')}" th:errors="*{teamLeader}">
                             에러입니다
                         </small>
                     </div>
                     <div class="form-group">
-                        <label for="url">담당자</label>
-                        <input id="url" type="url" th:field="*{manager}" class="form-control"
-                               placeholder="향후 콤보박스변환" aria-describedby="urlHelp" required>
-                        <small id="urlHelp" class="form-text text-muted">
-                            물품/개발
+                        <label for="depLeader">부서장</label>
+                        <input id="depLeader" type="text" th:field="*{depLeader}" class="form-control"
+                               placeholder="부서장" aria-describedby="depLeaderHelp" required>
+                        <small id="depLeaderHelp" class="form-text text-muted">
+                            부서장
                         </small>
-                        <small class="form-text text-danger" th:if="${#fields.hasErrors('projectType')}" th:errors="*{url}">
-                            옳바른 URL이 아닙니다. 예시처럼 입력해 주세요.
-                        </small>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="company">담당 EPMO</label>
-                        <input id="company" type="text" th:field="*{epmo}" class="form-control"
-                               placeholder="어떤 일을 하고 계신가요?" aria-describedby="occupationHelp" required>
-                        <small id="occupationHelp" class="form-text text-muted">
-                            개발자? 매니저? 취준생? 대표님?
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('depLeader')}" th:errors="*{depLeader}">
+                            에러
                         </small>
                     </div>
 
                     <div class="form-group">
-                        <label for="location">총금액(원)</label>
-                        <input id="location" type="text" th:field="*{totalAmount}" class="form-control"
-                               placeholder="금액입력"
-                               aria-describedby="locationdHelp" required>
-                        <small id="locationdHelp" class="form-text text-muted">
-                            주요 활동(사는 곳이나 직장을 다니는 곳 또는 놀러 다니는 곳) 지역의 도시 이름을 알려주세요.
+                        <label for="generalLeader">본부장(필요시)</label>
+                        <input id="generalLeader" type="text" th:field="*{generalLeader}" class="form-control"
+                               placeholder="본부장" aria-describedby="generalLeader" required>
+                        <small id="generalLeaderHelp" class="form-text text-muted">
+                            본부장
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="vicePresident">총금액(원)</label>
+                        <input id="vicePresident" type="text" th:field="*{vicePresident}" class="form-control"
+                               placeholder="부행장"
+                               aria-describedby="vicePresidentHelp" required>
+                        <small id="vicePresidentHelp" class="form-text text-muted">
+                            부행장
                         </small>
                     </div>
                     <div class="form-group">

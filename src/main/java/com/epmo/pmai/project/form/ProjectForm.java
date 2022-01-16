@@ -1,6 +1,10 @@
 package com.epmo.pmai.project.form;
 
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
+@Data
+@RequiredArgsConstructor
 public class ProjectForm {
     private String title;
     //부서

@@ -7,7 +7,7 @@
 <div class="container">
     <div class="row mt-5 justify-content-center">
         <div class="col-2">
-            <div th:replace="fragments.html :: settings-menu(currentMenu='outline')"></div>
+            <div th:replace="fragments.html :: settings-menu(currentMenu='contents')"></div>
         </div>
         <div class="col-8">
             <div th:if="${message}" class="alert alert-info alert-dismissible fade show mt-3" role="alert">
@@ -17,62 +17,61 @@
                 </button>
             </div>
             <div class="row">
-                <h2 class="col-sm-12" >1. 개요</h2>
+                <h2 class="col-sm-12" >3. 사업 내용</h2>
             </div>
             <div class="row mt-3">
-                <form class="col-sm-6" action="#" th:action="@{/project/outline}" th:object="${outlineForm}"
+                <form class="col-sm-6" action="#" th:action="@{/project/contents}" th:object="${contentsForm}"
                       method="post" novalidate>
 
                     <div class="form-group">
-                        <label for="title">사업명</label>
-                        <input id="title" type="text" th:field="*{title}" class="form-control"
-                               placeholder="사업명을 적어주세요" aria-describedby="bioHelp" required>
-                        <small id="titleHelp" class="form-text text-muted">
-                            사업명을 적어주세요
+                        <label for="background">추진배경(객관식)</label>
+                        <input id="background" type="text" th:field="*{background}" class="form-control"
+                               placeholder="추진배경" aria-describedby="backgroundHelp" required>
+                        <small id="backgroundHelp" class="form-text text-muted">
+                            추진배경(객관식)
                         </small>
-                        <small class="form-text text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
-                            조금 길어요.
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('background')}" th:errors="*{background}">
+                            에러
                         </small>
                     </div>
                     <div class="form-group">
-                        <label for="projectType">사업종류</label>
-                        <input id="projectType" type="url" th:field="*{projectType}" class="form-control"
-                               placeholder="향후 콤보박스변환" aria-describedby="urlHelp" required>
-                        <small id="projectTypeHelp" class="form-text text-muted">
-                           물품/개발
+                        <label for="backgroundDetail">추진배경(상세)</label>
+                        <input id="backgroundDetail" type="text" th:field="*{backgroundDetail}" class="form-control"
+                               placeholder="추진배경" aria-describedby="backgroundDetailHelp" required>
+                        <small id="backgroundDetailHelp" class="form-text text-muted">
+                           추진배경(상세)
                         </small>
-                        <small class="form-text text-danger" th:if="${#fields.hasErrors('projectType')}" th:errors="*{url}">
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('backgroundDetail')}" th:errors="*{backgroundDetail}">
                             에러입니다
                         </small>
                     </div>
                     <div class="form-group">
-                        <label for="url">담당자</label>
-                        <input id="url" type="url" th:field="*{manager}" class="form-control"
-                               placeholder="향후 콤보박스변환" aria-describedby="urlHelp" required>
-                        <small id="urlHelp" class="form-text text-muted">
-                            물품/개발
+                        <label for="capitalTotalAmount">자본 총합</label>
+                        <input id="capitalTotalAmount" type="text" th:field="*{capitalTotalAmount}" class="form-control"
+                               placeholder="자본 통합" aria-describedby="capitalTotalAmountHelp" required>
+                        <small id="capitalTotalAmountHelp" class="form-text text-muted">
+                            자본 총합
                         </small>
-                        <small class="form-text text-danger" th:if="${#fields.hasErrors('projectType')}" th:errors="*{url}">
-                            옳바른 URL이 아닙니다. 예시처럼 입력해 주세요.
-                        </small>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="company">담당 EPMO</label>
-                        <input id="company" type="text" th:field="*{epmo}" class="form-control"
-                               placeholder="어떤 일을 하고 계신가요?" aria-describedby="occupationHelp" required>
-                        <small id="occupationHelp" class="form-text text-muted">
-                            개발자? 매니저? 취준생? 대표님?
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('capitalTotalAmount')}" th:errors="*{capitalTotalAmount}">
+                            자본 총합
                         </small>
                     </div>
 
                     <div class="form-group">
-                        <label for="location">총금액(원)</label>
-                        <input id="location" type="text" th:field="*{totalAmount}" class="form-control"
+                        <label for="expenseTotalAmount">경비 총합</label>
+                        <input id="expenseTotalAmount" type="text" th:field="*{expenseTotalAmount}" class="form-control"
+                               placeholder="경비 총합" aria-describedby="expenseTotalAmountHelp" required>
+                        <small id="expenseTotalAmountHelp" class="form-text text-muted">
+                            경비 총합
+                        </small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="totalAmount">총금액(원)</label>
+                        <input id="totalAmount" type="text" th:field="*{totalAmount}" class="form-control"
                                placeholder="금액입력"
-                               aria-describedby="locationdHelp" required>
-                        <small id="locationdHelp" class="form-text text-muted">
-                            주요 활동(사는 곳이나 직장을 다니는 곳 또는 놀러 다니는 곳) 지역의 도시 이름을 알려주세요.
+                               aria-describedby="totalAmountHelp" required>
+                        <small id="totalAmountHelp" class="form-text text-muted">
                         </small>
                     </div>
                     <div class="form-group">

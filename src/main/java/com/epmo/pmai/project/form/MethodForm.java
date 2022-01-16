@@ -24,4 +24,5 @@ public class MethodForm {
     //협조부서
     private String cooperationDepartment;
 
+    private String totalAmount;
 }
