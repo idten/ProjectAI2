@@ -37,7 +37,7 @@ public class Project {
     //담당자
     private String manager;
 
-    private String shortDescription;
+    private String keyword;
 
     private String fullDescription;
     //2. 발의자

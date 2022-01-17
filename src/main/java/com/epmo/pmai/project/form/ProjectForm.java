@@ -20,7 +20,7 @@ public class ProjectForm {
     //담당자
     private String manager;
 
-    private String shortDescription;
+    private String keyword;
 
     private String fullDescription;
 

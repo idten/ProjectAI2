@@ -33,16 +33,16 @@
             </div>
 
             <div class="form-group">
-                <label for="shortDescription">짧은 소개</label>
-                <textarea id="shortDescription" type="textarea" th:field="*{shortDescription}" class="form-control"
-                       placeholder="프로젝트를 짧게 소개해 주세요" aria-describedby="shortDescription" required maxlength="100">
+                <label for="keyword">키워드</label>
+                <textarea id="keyword" type="text" th:field="*{keyword}" class="form-control"
+                       placeholder="키워드를 기재해 주세요 " aria-describedby="keyword" required maxlength="100">
                 </textarea>
-                <small id="shortDescriptionHelp" class="form-text text-muted">
-                    255자 이내로 짧은 소개해 주세요.
+                <small id="keywordHelp" class="form-text text-muted">
+                    키워드(스토리지, 라우터, 등등)
                 </small>
-                <small class="invalid-feedback">짧은 소개를 입력하세요</small>
-                <small class="form-text text-danger" th:if="${#fields.hasErrors('shortDescription')}"
-                       th:errors="*{shortDescription}">ShortDescription error</small>
+                <small class="invalid-feedback">키워드</small>
+                <small class="form-text text-danger" th:if="${#fields.hasErrors('keyword')}"
+                       th:errors="*{keyword}">Keyword error</small>
             </div>
             <div class="form-group">
                 <label for="fullDescription">상세 소개</label>
@@ -52,13 +52,13 @@
                 <small id="fullDescription" class="form-text text-muted">
                    프로젝트 설명을 적어주세요
                 </small>
-                <small class="invalid-feedback">스터디 경로를 입력하세요.</small>
+                <small class="invalid-feedback">입력하세요.</small>
                 <small class="form-text text-danger" th:if="${#fields.hasErrors('fullDescription')}"
                        th:errors="*{fullDescription}">ShortDescription error</small>
             </div>
             <div class="form-group">
                 <button class="btn btn-primary btn-block" type="submit" aria-describedby="submitHelp">
-                    스터디 만들기
+                    정보화사업 생성하기
                 </button>
             </div>
         </form>
