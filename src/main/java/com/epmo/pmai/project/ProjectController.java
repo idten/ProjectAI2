@@ -44,9 +44,12 @@ public class ProjectController {
     }
 
     @GetMapping("/project/{id}/outline")
-    public String outlineFormById(Model model,@PathVariable String id) {
+    public String outlineFormById(Model model,@PathVariable Long id) {
         //기본 입력페이지를 form으로 등록
         model.addAttribute("outlineForm",new OutlineForm());
+        Project project = projectService.getProjectById(id);
+        model.addAttribute("project",project);
+
         return "project/outline";
     }
 
@@ -64,13 +67,16 @@ public class ProjectController {
         }
         Project newProject = projectService.createNewProject(modelMapper.map(outlineForm,Project.class));
         return "redirect:/project/outline";
-
     }
 
+    //@GetMapping("/project/{id}/outline")
     @GetMapping("/project/{id}/register")
-    public String registerFormById(Model model, @PathVariable String id){
+    public String registerFormById(Model model, @PathVariable Long id){
         //기본 입력페이지를 form으로 등록
         model.addAttribute("registerForm",new RegisterForm());
+        Project project = projectService.getProjectById(id);
+        model.addAttribute("project",project);
+
         return "project/register";
     }
 
@@ -102,10 +108,13 @@ public class ProjectController {
         return "project/contents";
     }
 
-    @GetMapping("/project/{path}/contents")
-    public String contentsFormById(Model model,@PathVariable String id) {
+    @GetMapping("/project/{id}/contents")
+    public String contentsFormById(Model model,@PathVariable Long id) {
         //기본 입력페이지를 form으로 등록
         model.addAttribute("contentsForm",new ContentsForm());
+        Project project = projectService.getProjectById(id);
+        model.addAttribute("project",project);
+
         return "project/contents";
     }
 
@@ -117,9 +126,12 @@ public class ProjectController {
     }
 
     @GetMapping("/project/{id}/method")
-    public String methodFormById(Model model,@PathVariable String id) {
+    public String methodFormById(Model model,@PathVariable Long id) {
         //기본 입력페이지를 form으로 등록
         model.addAttribute("methodForm",new MethodForm());
+        Project project = projectService.getProjectById(id);
+        model.addAttribute("project",project);
+
         return "project/method";
     }
 

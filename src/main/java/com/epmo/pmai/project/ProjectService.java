@@ -8,6 +8,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -28,6 +30,12 @@ public class ProjectService {
         modelMapper.map(registerForm, project);
         repository.save(project);
     }
+    public Project getProjectById(Long id) {
+        Project project = this.repository.findById(id).orElseThrow(IllegalArgumentException::new);//.findByPath(path);
+        checkIfExistingProject(id, project);
+        return project;
+    }
+
 
     public void updateMethod(Project project, MethodForm methodForm) {
         modelMapper.map(methodForm, project);
@@ -38,5 +46,11 @@ public class ProjectService {
         modelMapper.map(contentsForm, project);
         repository.save(project);
     }
+    private void checkIfExistingProject(Long id, Project project) {
+        if (project == null) {
+            throw new IllegalArgumentException(id + "에 해당하는 프로젝트가 없습니다.");
+        }
+    }
+    
 
 }
