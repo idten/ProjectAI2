@@ -100,7 +100,4 @@ public class Project {
     //현재 단계(임시저장 - 저장 - 승인(epmo)
     private ProjectStep step;
 
-    @Column(unique = true)
-    private String path;
-
 }
