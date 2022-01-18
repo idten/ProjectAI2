@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
@@ -39,7 +40,14 @@ public class ProjectController {
             return "study/form";
         }
         Project newProject = projectService.createNewProject(modelMapper.map(projectForm,Project.class));
-        return "redirect:/project/"+newProject.getId();
+        return "redirect:/project/"+newProject.getId()+"/outline";
+    }
+
+    @GetMapping("/project/{id}/outline")
+    public String outlineFormById(Model model,@PathVariable String id) {
+        //기본 입력페이지를 form으로 등록
+        model.addAttribute("outlineForm",new OutlineForm());
+        return "project/outline";
     }
 
     @GetMapping("/project/outline")
@@ -58,12 +66,22 @@ public class ProjectController {
         return "redirect:/project/outline";
 
     }
+
+    @GetMapping("/project/{id}/register")
+    public String registerFormById(Model model, @PathVariable String id){
+        //기본 입력페이지를 form으로 등록
+        model.addAttribute("registerForm",new RegisterForm());
+        return "project/register";
+    }
+
     @GetMapping("/project/register")
     public String registerForm(Model model) {
         //기본 입력페이지를 form으로 등록
         model.addAttribute("registerForm",new RegisterForm());
         return "project/register";
     }
+
+
 
     @PostMapping("/project/register")
     public String registerSubmit(@Valid RegisterForm registerForm, Errors errors){
@@ -84,20 +102,31 @@ public class ProjectController {
         return "project/contents";
     }
 
+    @GetMapping("/project/{path}/contents")
+    public String contentsFormById(Model model,@PathVariable String id) {
+        //기본 입력페이지를 form으로 등록
+        model.addAttribute("contentsForm",new ContentsForm());
+        return "project/contents";
+    }
+
     @GetMapping("/project/method")
     public String methodForm(Model model) {
         //기본 입력페이지를 form으로 등록
         model.addAttribute("methodForm",new MethodForm());
         return "project/method";
     }
+
+    @GetMapping("/project/{id}/method")
+    public String methodFormById(Model model,@PathVariable String id) {
+        //기본 입력페이지를 form으로 등록
+        model.addAttribute("methodForm",new MethodForm());
+        return "project/method";
+    }
+
     @GetMapping("/project/etc")
     public String etcForm(Model model) {
         //기본 입력페이지를 form으로 등록
         model.addAttribute("etcForm",new EtcForm());
         return "project/etc";
     }
-
-
-
-
 }

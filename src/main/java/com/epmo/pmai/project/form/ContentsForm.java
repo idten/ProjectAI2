@@ -25,6 +25,10 @@ public class ContentsForm {
     // 경비 총합
     private String expenseTotalAmount;
 
+    // 자본 총합
+    private String totalAmount;
+
+
     //도입내역
     @OneToMany
     private Set<Product> products;
