@@ -141,4 +141,11 @@ public class ProjectController {
         model.addAttribute("etcForm",new EtcForm());
         return "project/etc";
     }
+
+    @GetMapping("/project/{id}")
+    public String viewProject(@PathVariable Long id, Model model) {
+        Project project = projectService.getProjectById(id);
+        model.addAttribute(project);
+        return "project/view";
+    }
 }
