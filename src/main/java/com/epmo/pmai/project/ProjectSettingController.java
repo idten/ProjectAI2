@@ -8,4 +8,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/project/{path}/settings")
 @RequiredArgsConstructor
 public class ProjectSettingController {
+    
 }
