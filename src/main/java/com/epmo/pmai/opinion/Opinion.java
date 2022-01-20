@@ -1,5 +1,6 @@
 package com.epmo.pmai.opinion;
 
+import com.epmo.pmai.account.Account;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -17,4 +18,7 @@ public class Opinion {
     @Id
     @GeneratedValue
     private String id;
+
+    private Account account;
+
 }
