@@ -4,6 +4,5 @@ public enum ProductType {
     DEVELOPMENT,
     SOFTWARE,
     HARDWARD,
-
     EXPENSE  //경비
 }
