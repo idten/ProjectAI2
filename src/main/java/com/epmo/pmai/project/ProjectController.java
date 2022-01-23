@@ -1,6 +1,8 @@
 package com.epmo.pmai.project;
 
 
+import com.epmo.pmai.account.Account;
+import com.epmo.pmai.account.AccountRepository;
 import com.epmo.pmai.project.form.*;
 import com.epmo.pmai.project.form.OutlineForm;
 
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -27,17 +30,20 @@ public class ProjectController {
     private final ProjectRepository projectRepository;
     private final ProjectService projectService;
     private final ModelMapper modelMapper;
+    private final AccountRepository accountRepository;
 
     @GetMapping("/new-project")
     public String newProjectForm(Model model){
     //    model.addAttribute(account);
         model.addAttribute(new ProjectForm());
+        List<Account> epmoLists = accountRepository.findByRole("EPMO");
+        model.addAttribute("epmoLists",epmoLists);
         return "project/form";
     }
     @PostMapping("/new-project")
     public String newProjectSubmit(@Valid ProjectForm projectForm, Errors errors){
         if(errors.hasErrors()){
-            return "study/form";
+            return "project/form";
         }
         Project newProject = projectService.createNewProject(modelMapper.map(projectForm,Project.class));
         return "redirect:/project/"+newProject.getId()+"/outline";

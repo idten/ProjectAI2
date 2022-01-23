@@ -26,7 +26,7 @@ public class Project {
     private String title;
 
     // 총 금액
-    private Long totalAmount;
+    // ;
 
     // 개발, 물품
     private String projectType;

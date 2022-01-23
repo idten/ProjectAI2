@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 @Getter
@@ -19,6 +20,5 @@ public class Opinion {
     @GeneratedValue
     private String id;
 
-    private Account account;
-
+    private String title;
 }
