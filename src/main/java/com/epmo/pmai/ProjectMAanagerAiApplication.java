@@ -3,6 +3,7 @@ package com.epmo.pmai;
 import com.epmo.pmai.account.Account;
 import com.epmo.pmai.account.AccountRepository;
 import com.epmo.pmai.project.Project;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class ProjectMAanagerAiApplication {
 
+    @Autowired
     AccountRepository accountRepository;
 
     public static void main(String[] args) {

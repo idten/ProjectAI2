@@ -37,6 +37,7 @@ public class ProjectController {
     //    model.addAttribute(account);
         model.addAttribute(new ProjectForm());
         List<Account> epmoLists = accountRepository.findByRole("EPMO");
+        log.info("epmoList:"+epmoLists.size()+"명");
         model.addAttribute("epmoLists",epmoLists);
         return "project/form";
     }

@@ -33,14 +33,13 @@
             </div>
             <div class="form-group">
                 <label for="epmoLists">담당EPMO</label>
-                <select th:field="*{eventType}"  class="custom-select mr-sm-2" id="eventType" aria-describedby="eventTypeHelp">
-                    <option th:value="FCFS">선착순</option>
-                    <option th:value="CONFIRMATIVE">관리자 확인</option>
+                <select   class="custom-select mr-sm-2 form-control" id="epmoList" aria-describedby="epmoHelp">
+                    <option th:value="0" >--선택하세요--</option>
+                    <option th:each="epmo : ${epmoLists}" th:value="${epmo?.id}" th:text="${epmo?.name}" />
+                    <option th:value="99" >미정</option>
                 </select>
-                <small id="eventTypeHelp" class="form-text text-muted">
-                    두가지 모집 방법이 있습니다.<br/>
-                    <strong>선착순</strong>으로 모집하는 경우, 모집 인원 이내의 접수는 자동으로 확정되며, 제한 인원을 넘는 신청은 대기 신청이 되며 이후에 확정된 신청 중에 취소가 발생하면 선착순으로 대기 신청자를 확정 신청자도 변경합니다. 단, 등록 마감일 이후에는 취소해도 확정 여부가 바뀌지 않습니다.<br/>
-                    <strong>확인</strong>으로 모집하는 경우, 모임 및 스터디 관리자가 모임 신청 목록을 조회하고 직접 확정 여부를 정할 수 있습니다. 등록 마감일 이후에는 변경할 수 없습니다.
+                <small id="epmoHelp" class="form-text text-muted">
+                    담당 EPMO를 골라 주세요
                 </small>
             </div>
             <div class="form-group">
