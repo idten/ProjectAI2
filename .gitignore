@@ -34,3 +34,7 @@ build/
 
 # Project exclude paths
 /src/main/resources/static/node_modules/
+
+### NPM (버젼관리 안함)###
+src/main/resources/static/node_modules
+src/main/resources/static/node

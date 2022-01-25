@@ -347,6 +347,7 @@
             }
 
             var tagInput = document.querySelector("#tags");
+            alert(document.querySelector("#whitelist").textContent);
             var tagify = new Tagify(tagInput, {
                 pattern: /^.{0,20}$/,
                 whitelist: JSON.parse(document.querySelector("#whitelist").textContent),

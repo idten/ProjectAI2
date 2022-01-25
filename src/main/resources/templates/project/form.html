@@ -32,6 +32,17 @@
                        th:errors="*{totalAmount}">Title error</small>
             </div>
             <div class="form-group">
+                <label for="projectTypeLists">담당EPMO</label>
+                <select   class="custom-select mr-sm-2 form-control" id="projectTypeList" aria-describedby="epmoHelp">
+                    <option th:value="0" >--선택하세요--</option>
+                    <option th:each="epmo : ${projectTypeLists}" th:value="${epmo?.id}" th:text="${epmo?.name}" />
+                    <option th:value="99" >미정</option>
+                </select>
+                <small id="epmoHelp" class="form-text text-muted">
+                    담당 EPMO를 골라 주세요
+                </small>
+            </div>
+            <div class="form-group">
                 <label for="epmoLists">담당EPMO</label>
                 <select   class="custom-select mr-sm-2 form-control" id="epmoList" aria-describedby="epmoHelp">
                     <option th:value="0" >--선택하세요--</option>
@@ -43,30 +54,6 @@
                 </small>
             </div>
             <div class="form-group">
-                <label for="keyword">키워드</label>
-                <textarea id="keyword" type="text" th:field="*{keyword}" class="form-control"
-                       placeholder="키워드를 기재해 주세요 " aria-describedby="keyword" required maxlength="100">
-                </textarea>
-                <small id="keywordHelp" class="form-text text-muted">
-                    키워드(스토리지, 라우터, 등등)
-                </small>
-                <small class="invalid-feedback">키워드</small>
-                <small class="form-text text-danger" th:if="${#fields.hasErrors('keyword')}"
-                       th:errors="*{keyword}">Keyword error</small>
-            </div>
-            <div class="form-group">
-                <label for="fullDescription">상세 소개</label>
-                <textarea id="fullDescription" type="textarea" th:field="*{fullDescription}" class="editor form-control"
-                       placeholder="스터디를 자세하게 소개해 주세요" aria-describedby="fullDescription" required>
-                </textarea>
-                <small id="fullDescription" class="form-text text-muted">
-                   프로젝트 설명을 적어주세요
-                </small>
-                <small class="invalid-feedback">입력하세요.</small>
-                <small class="form-text text-danger" th:if="${#fields.hasErrors('fullDescription')}"
-                       th:errors="*{fullDescription}">ShortDescription error</small>
-            </div>
-            <div class="form-group">
                 <button class="btn btn-primary btn-block" type="submit" aria-describedby="submitHelp">
                     정보화사업 생성하기
                 </button>
@@ -75,6 +62,9 @@
     </div>
     <div th:replace="fragments.html :: footer"></div>
 </div>
+
+<script th:replace="fragments.html :: update-tags(baseUrl='/study/settings/tags')"></script>
+
     <script th:replace="fragments.html :: tooltip"></script>
     <script th:replace="fragments.html :: form-validation"></script>
     <script th:replace="fragments.html :: editor-script"></script>

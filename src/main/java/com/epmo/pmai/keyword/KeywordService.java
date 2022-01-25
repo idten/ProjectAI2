@@ -10,4 +10,15 @@ import org.springframework.transaction.annotation.Transactional;
 public class KeywordService {
     private final KeywordRepository keywordRepository;
 
+    public Keyword findOrCreateNew(String keywordTitle){
+        Keyword keyword = keywordRepository.findByTitle(keywordTitle);
+        if(keyword == null){
+            keyword = keywordRepository.save(Keyword.builder().title(keywordTitle).build());
+        }
+        return keyword;
+    }
+
+    public Keyword findByTitle(String keywordTitle){
+        return null;
+    }
 }

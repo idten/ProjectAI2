@@ -2,6 +2,8 @@ package com.epmo.pmai;
 
 import com.epmo.pmai.account.Account;
 import com.epmo.pmai.account.AccountRepository;
+import com.epmo.pmai.keyword.Keyword;
+import com.epmo.pmai.keyword.KeywordRepository;
 import com.epmo.pmai.project.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
@@ -12,8 +14,9 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class ProjectMAanagerAiApplication {
 
+    @Autowired AccountRepository accountRepository;
     @Autowired
-    AccountRepository accountRepository;
+    KeywordRepository keywordRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(ProjectMAanagerAiApplication.class, args);
@@ -47,6 +50,9 @@ public class ProjectMAanagerAiApplication {
             accountRepository.save(epmo4);
             accountRepository.save(epmo5);
             accountRepository.save(epmo6);
+
+            Keyword keyword = Keyword.builder().title("스토리지").build();
+            keywordRepository.save(keyword);
         };
     }
 }

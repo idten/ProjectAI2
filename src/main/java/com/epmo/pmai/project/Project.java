@@ -1,11 +1,13 @@
 package com.epmo.pmai.project;
 
 
+import com.epmo.pmai.keyword.Keyword;
 import com.epmo.pmai.product.Product;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -99,5 +101,9 @@ public class Project {
 
     //현재 단계(임시저장 - 저장 - 승인(epmo)
     private ProjectStep step;
+
+    @ManyToMany
+    private Set<Keyword> keywords = new HashSet<>();
+
 
 }

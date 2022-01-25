@@ -3,9 +3,13 @@ package com.epmo.pmai.project;
 
 import com.epmo.pmai.account.Account;
 import com.epmo.pmai.account.AccountRepository;
+import com.epmo.pmai.keyword.Keyword;
+import com.epmo.pmai.keyword.KeywordRepository;
 import com.epmo.pmai.project.form.*;
 import com.epmo.pmai.project.form.OutlineForm;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -21,6 +25,7 @@ import javax.validation.Valid;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
@@ -31,14 +36,25 @@ public class ProjectController {
     private final ProjectService projectService;
     private final ModelMapper modelMapper;
     private final AccountRepository accountRepository;
+    private final KeywordRepository keywordRepository;
+    private final ObjectMapper objectMapper;
 
     @GetMapping("/new-project")
-    public String newProjectForm(Model model){
+    public String newProjectForm(Model model) throws JsonProcessingException {
     //    model.addAttribute(account);
         model.addAttribute(new ProjectForm());
         List<Account> epmoLists = accountRepository.findByRole("EPMO");
         log.info("epmoList:"+epmoLists.size()+"명");
         model.addAttribute("epmoLists",epmoLists);
+
+        //model.addAttribute("tags","테스트,테스트2");
+//        List<String> allKeywordTitles = keywordRepository.findAll()
+//                .stream().map(Keyword::getTitle).collect(Collectors.toList());
+//        log.info("keyword="+allKeywordTitles);
+//
+//        model.addAttribute("whiteList",objectMapper.writeValueAsString(allKeywordTitles));
+//        log.info("keyword="+objectMapper.writeValueAsString(allKeywordTitles));
+
         return "project/form";
     }
     @PostMapping("/new-project")
@@ -47,6 +63,7 @@ public class ProjectController {
             return "project/form";
         }
         Project newProject = projectService.createNewProject(modelMapper.map(projectForm,Project.class));
+
         return "redirect:/project/"+newProject.getId()+"/outline";
     }
 

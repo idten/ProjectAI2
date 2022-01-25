@@ -8,5 +8,15 @@
     "mark.js": "^8.11.1",
     "moment": "^2.29.1",
     "summernote": "^0.8.20"
-  }
+  },
+  "name": "static",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
