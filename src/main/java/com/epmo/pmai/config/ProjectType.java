@@ -18,6 +18,11 @@ public class ProjectType {
 
     @Id
     @GeneratedValue
-    private String id;
+    private Long id;
+
+    private String title;
+
+    //향후 관련해서 Type 별 가이드 내용 등 추가 하면 될 것으로 보임
+
 
 }

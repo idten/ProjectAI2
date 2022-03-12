@@ -10,18 +10,18 @@ import javax.validation.constraints.NotBlank;
 public class ProjectForm {
 
     private String title;
-    // 총 금액
-    private Long totalAmount;
 
+    private String department;
     // 개발, 물품
     @NotBlank
     private String projectType;
 
+    private String epmo;
     //담당자
     private String manager;
 
     private String keyword;
 
-    private String fullDescription;
+//    private String fullDescription;
 
 }

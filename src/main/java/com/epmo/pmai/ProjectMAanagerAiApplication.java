@@ -2,6 +2,8 @@ package com.epmo.pmai;
 
 import com.epmo.pmai.account.Account;
 import com.epmo.pmai.account.AccountRepository;
+import com.epmo.pmai.config.ProjectType;
+import com.epmo.pmai.config.ProjectTypeRepository;
 import com.epmo.pmai.keyword.Keyword;
 import com.epmo.pmai.keyword.KeywordRepository;
 import com.epmo.pmai.project.Project;
@@ -15,8 +17,8 @@ import org.springframework.context.annotation.Bean;
 public class ProjectMAanagerAiApplication {
 
     @Autowired AccountRepository accountRepository;
-    @Autowired
-    KeywordRepository keywordRepository;
+    @Autowired KeywordRepository keywordRepository;
+    @Autowired ProjectTypeRepository projectTypeRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(ProjectMAanagerAiApplication.class, args);
@@ -37,12 +39,29 @@ public class ProjectMAanagerAiApplication {
 //
 
             //Project newProject = Project.builder().
-            Account epmo1 = Account.builder().nickname("d23358").email("").name("박현조").role("EPMO").build();
-            Account epmo2 = Account.builder().nickname("d00001").email("").name("김정완").role("EPMO").build();
-            Account epmo3 = Account.builder().nickname("d00002").email("").name("김현수").role("EPMO").build();
-            Account epmo4 = Account.builder().nickname("d00003").email("").name("전예지").role("EPMO").build();
-            Account epmo5 = Account.builder().nickname("d00004").email("").name("송병훈").role("EPMO").build();
-            Account epmo6 = Account.builder().nickname("d00005").email("").name("박원걸").role("EPMO").build();
+            Account epmo1 = Account.builder().nickname("d23358")
+                    .email("luel83@ibk.co.kr").name("박현조").role("EPMO")
+                    .department("IT기획부").build();
+            Account epmo2 = Account.builder().nickname("d23325")
+                    .email("lemonbom2@gmail.com").name("김정완").role("EPMO")
+                    .department("IT기획부").build();
+            Account epmo3 = Account.builder().nickname("d44491")
+                    .email("chris.hskim@ibk.co.kr").name("김현수").role("EPMO")
+                    .department("IT기획부").build();
+            Account epmo4 = Account.builder().nickname("d43131")
+                    .email("jeonyeji@ibk.co.kr").name("전예지").role("EPMO")
+                    .department("IT기획부").build();
+            Account epmo5 = Account.builder().nickname("d42477").email("").name("송병훈").role("EPMO")
+                    .department("IT기획부").build();
+            Account epmo6 = Account.builder().nickname("d23564").email("").name("박원걸").role("EPMO")
+                    .department("IT기획부").build();
+            Account epmo7 = Account.builder().nickname("d20047").email("").name("김상백").role("EPMO")
+                    .department("IT기획부").build();
+
+            //발의자
+            Account initiator1 = Account.builder().nickname("d11111").email("")
+                    .name("송태일").role("INITIATOR")
+                    .department("자금세탁방지부").build();
 
             accountRepository.save(epmo1);
             accountRepository.save(epmo2);
@@ -50,9 +69,24 @@ public class ProjectMAanagerAiApplication {
             accountRepository.save(epmo4);
             accountRepository.save(epmo5);
             accountRepository.save(epmo6);
+            accountRepository.save(epmo7);
+
+            accountRepository.save(initiator1);
+
 
             Keyword keyword = Keyword.builder().title("스토리지").build();
             keywordRepository.save(keyword);
+
+
+            ProjectType projectType1 = ProjectType.builder().title("스토리지").build();
+            ProjectType projectType2 = ProjectType.builder().title("네트워크").build();
+            ProjectType projectType3 = ProjectType.builder().title("보안").build();
+
+            projectTypeRepository.save(projectType1);
+            projectTypeRepository.save(projectType2);
+            projectTypeRepository.save(projectType3);
+
+
         };
     }
 }

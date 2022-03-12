@@ -22,6 +22,8 @@ public class Account {
     @GeneratedValue
     private Long id;
 
+    private String department;
+
     private String nickname;
     //email과 nickname으로 로그인 기능 제공할 예정이므로 unique
 

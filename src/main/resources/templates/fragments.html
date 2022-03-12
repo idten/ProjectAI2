@@ -70,6 +70,23 @@
         table th {
             font-weight: lighter;
         }
+        .nav-item:nth-child(1){flex-grow: 1; text-align: center;}
+        .nav-item:nth-child(2){flex-grow: 1; text-align: center;}
+        .nav-item:nth-child(3){flex-grow: 1; text-align: center;}
+        .nav-item:nth-child(4){flex-grow: 1; text-align: center;}
+        .nav-item:nth-child(5){flex-grow: 1; text-align: center;}
+        .nav-item:nth-child(6){flex-grow: 1; text-align: center;}
+        .nav-item:nth-child(7){flex-grow: 1; text-align: center;}
+        .nav-item:nth-child(8){flex-grow: 1; text-align: center;}
+        .nav-item:nth-child(9){flex-grow: 1; text-align: center;}
+
+        .justify-content-end {
+            justify-content: space-between;
+            width: 100%;
+        }
+        .searchinput{
+            width:60%;
+        }
 
     </style>
 </head>
@@ -82,45 +99,50 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav mr-auto searchinput">
             <li class="nav-item">
                 <form th:action="@{/search/study}" class="form-inline" method="get">
-                    <input class="form-control mr-sm-2" name="keyword" type="search" placeholder="정보화사업 찾기" aria-label="Search" />
+                    <input class="form-control mr-sm-2" name="keyword" type="search" placeholder="통합검색" aria-label="Search" />
                 </form>
             </li>
         </ul>
 
         <ul class="navbar-nav justify-content-end">
             <li class="nav-item" sec:authorize="!isAuthenticated()">
-                <a class="nav-link"  th:href="@{/login}">로그인</a>
+                <a class="nav-link"  th:href="@{/project}">정보화 사업</a>
             </li>
             <li class="nav-item" sec:authorize="!isAuthenticated()">
-                <a class="nav-link"  th:href="@{/sign-up}">가입</a>
+                <a class="nav-link"  th:href="@{/review}">검토</a>
             </li>
+            <li class="nav-item" sec:authorize="!isAuthenticated()">
+                <a class="nav-link"  th:href="@{/issue}">이슈</a>
+            </li>
+            <li class="nav-item" sec:authorize="!isAuthenticated()">
+                <a class="nav-link"  th:href="@{/guide}">가이드</a>
+            </li>
+            <li class="nav-item" sec:authorize="!isAuthenticated()">
+                <a class="nav-link"  th:href="@{/qna}">Q&A</a>
+            </li>
+
             <li class="nav-item" sec:authorize="isAuthenticated()">
                 <a class="nav-link"  th:href="@{/notifications}">
                   </a>
             </li>
+            <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+                <button type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    박현조(luel@naer.com)
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Separated link</a>
+                </div>
+            </li>
             <li class="nav-item" sec:authorize="isAuthenticated()">
                 <a class="nav-link btn btn-outline-primary"  th:href="@{/new-project}">
                     <i class="fa fa-plus"></i>정보화사업 개설</a>
-            </li>
-            <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
-                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    </a>
-                <div class="dropdown-menu dropdown-menu-sm-right" aria-labelledby="userDropdown">
-                    <h6 class="dropdown-header">
-                        <span sec:authentication="name">Username</span>
-                    </h6>
-
-                    <a class="dropdown-item" >사업등록</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#" th:href="@{'/settings/profile'}">설정</a>
-                    <form class="form-inline my-2 my-lg-0" action="#" th:action="@{/logout}" method="post">
-                        <button class="dropdown-item" type="submit">로그아웃</button>
-                    </form>
-                </div>
             </li>
         </ul>
     </div>
@@ -133,10 +155,9 @@
 </footer>
 
 <div th:fragment="settings-menu (currentMenu)" class="list-group">
-    <a class="list-group-item list-group-item-action" th:classappend="${currentMenu == 'outline'}? active" href="#" th:href="@{'/project/'  + ${project.id} + '/outline'}">1. 개요</a>
-    <a class="list-group-item list-group-item-action" th:classappend="${currentMenu == 'register'}? active" href="#" th:href="@{'/project/' + ${project.id} + '/register'}">2. 발의자</a>
-    <a class="list-group-item list-group-item-action" th:classappend="${currentMenu == 'contents'}? active" href="#" th:href="@{'/project/' + ${project.id} + '/contents'}">3. 사업내용</a>
-    <a class="list-group-item list-group-item-action" th:classappend="${currentMenu == 'method'}? active" href="#" th:href="@{'/project/'   + ${project.id} + '/method'}">4. 사업추진방법</a>
+    <a class="list-group-item list-group-item-action" th:classappend="${currentMenu == 'outline'}? active" href="#" th:href="@{'/project/outline'}">1. 개요</a>
+    <a class="list-group-item list-group-item-action" th:classappend="${currentMenu == 'register'}? active" href="#" th:href="@{'/project/register'}">2. 사업내용</a>
+    <a class="list-group-item list-group-item-action" th:classappend="${currentMenu == 'contents'}? active" href="#" th:href="@{'/project/contents'}">3. 추진방법</a>
 </div>
 <div th:fragment="study-banner" th:if="${study.useBanner}" class="row" id="study-logo">
     <img th:src="${study.image}"/>
@@ -191,7 +212,7 @@
 </div>
 
 <div th:fragment="study-settings-menu (currentMenu)" class="list-group">
-    <a class="list-group-item list-group-item-action" th:classappend="${currentMenu == 'description'}? active"
+    <a class="list-group-item list-group-item-action" th:classappend="${currentMenu == 'outline'}? active"
        href="#" th:href="@{'/study/' + ${study.path} + '/settings/description'}">소개</a>
     <a class="list-group-item list-group-item-action" th:classappend="${currentMenu == 'image'}? active"
        href="#" th:href="@{'/study/' + ${study.path} + '/settings/banner'}">배너 이미지</a>

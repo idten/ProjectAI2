@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: head"></head>
+<body class="bg-light">
+<div th:replace="fragments.html :: main-nav"></div>
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>정보화 사업 개설</h2>
+    </div>
+    <div class="row justify-content-center">
+
+        <div class="col-2">
+            <div th:replace="fragments.html :: settings-menu(currentMenu='outline')"></div>
+        </div>
+
+        <div class="col-8">
+        <form class="needs-validation col-sm-10" th:action="@{/new-project}" th:object="${projectForm}"
+              method="post" novalidate>
+            <div class="form-group">
+                <label for="path">정보화사업 이름</label>
+                <input id="path" type="text" th:field="*{title}" class="form-control"
+                       placeholder="자금세탁방지시스템 스토리지 증설" aria-describedby="pathHelp" required min="2" max="20">
+                <small id="pathHelp" class="form-text text-muted">
+                    사업 명을 적어주세요
+                </small>
+                <small class="invalid-feedback">사업 명을 입력하세요.</small>
+                <small class="form-text text-danger" th:if="${#fields.hasErrors('title')}"
+                       th:errors="*{title}">Path error</small>
+            </div>
+            <div class="form-group">
+                <label for="department">발의부서</label>
+                <input id="department" th:placeholder="${initiator.department}" type="text" th:field="*{department}"
+                       class="form-control"
+                       aria-describedby="departmentHelp">
+                <small id="departmentHelp" class="form-text text-muted">
+                    부서명(로그인 사용자 기준)이며 변경시에만 입력
+                </small>
+                <small class="invalid-feedback">사업 명을 입력하세요.</small>
+                <small class="form-text text-danger" th:if="${#fields.hasErrors('title')}"
+                       th:errors="*{title}">Path error</small>
+            </div>
+            <div class="form-group">
+                <label for="manager">발의자</label>
+                <input id="manager" th:placeholder="${initiator.name}" type="text" th:field="*{manager}"
+                       class="form-control"
+                       aria-describedby="managerHelp">
+                <small id="Help" class="form-text text-muted">
+                    발의자(로그인 사용자 기준)이며 변경시에만 입력
+                </small>
+                <small class="invalid-feedback">사업 명을 입력하세요.</small>
+                <small class="form-text text-danger" th:if="${#fields.hasErrors('title')}"
+                       th:errors="*{title}">Path error</small>
+            </div>
+            <div class="form-group">
+                <label for="projectTypeList">정보화사업 종류</label>
+                <select   class="custom-select mr-sm-2 form-control" id="projectTypeList" th:field="*{projectType}" aria-describedby="projectTypeListHelp">
+                    <option th:value="0" >--선택하세요--</option>
+                    <option th:each="projectType : ${projectTypeLists}" th:value="${projectType?.id}" th:text="${projectType?.title}" />
+                    <option th:value="99" >미정</option>
+                </select>
+                <small id="projectTypeHelp" class="form-text text-muted">
+                    정보화사업 종류를 고르세요
+                </small>
+            </div>
+            <div class="form-group">
+                <label for="epmoList">담당EPMO</label>
+                <select   class="custom-select mr-sm-2 form-control" id="epmoList" aria-describedby="epmoHelp">
+                    <option th:value="0" >--선택하세요--</option>
+                    <option th:each="epmo : ${epmoLists}" th:value="${epmo?.id}" th:text="${epmo?.name}" />
+                    <option th:value="99" >미정</option>
+                </select>
+                <small id="epmoHelp" class="form-text text-muted">
+                    담당 EPMO를 골라 주세요
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="keyword">키워드</label>
+                <input id="keyword" type="text" th:field="*{keyword}" class="form-control"
+                       placeholder="키워드" aria-describedby="keywordHelp" required min="2" max="20">
+                <small id="keywordHelp" class="form-text text-muted">
+                    유사 사업을 찾을 수 있는 키워드를 적어주세요(스토리지,부서 등)
+                </small>
+                <small class="invalid-feedback">키워드를 입력하세요.</small>
+                <small class="form-text text-danger" th:if="${#fields.hasErrors('keyword')}"
+                       th:errors="*{keyword}">Keyword error</small>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-block" type="submit" aria-describedby="submitHelp">
+                    정보화사업 생성하기
+                </button>
+            </div>
+        </form>
+        </div>
+    </div>
+    <div th:replace="fragments.html :: footer"></div>
+</div>
+
+<script th:replace="fragments.html :: update-tags(baseUrl='/study/settings/tags')"></script>
+
+    <script th:replace="fragments.html :: tooltip"></script>
+    <script th:replace="fragments.html :: form-validation"></script>
+    <script th:replace="fragments.html :: editor-script"></script>
+</body>
+</html>

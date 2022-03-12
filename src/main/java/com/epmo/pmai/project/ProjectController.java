@@ -3,6 +3,8 @@ package com.epmo.pmai.project;
 
 import com.epmo.pmai.account.Account;
 import com.epmo.pmai.account.AccountRepository;
+import com.epmo.pmai.config.ProjectType;
+import com.epmo.pmai.config.ProjectTypeRepository;
 import com.epmo.pmai.keyword.Keyword;
 import com.epmo.pmai.keyword.KeywordRepository;
 import com.epmo.pmai.project.form.*;
@@ -36,6 +38,7 @@ public class ProjectController {
     private final ProjectService projectService;
     private final ModelMapper modelMapper;
     private final AccountRepository accountRepository;
+    private final ProjectTypeRepository projectTypeRepository;
     private final KeywordRepository keywordRepository;
     private final ObjectMapper objectMapper;
 
@@ -47,13 +50,16 @@ public class ProjectController {
         log.info("epmoList:"+epmoLists.size()+"명");
         model.addAttribute("epmoLists",epmoLists);
 
-        //model.addAttribute("tags","테스트,테스트2");
-//        List<String> allKeywordTitles = keywordRepository.findAll()
-//                .stream().map(Keyword::getTitle).collect(Collectors.toList());
-//        log.info("keyword="+allKeywordTitles);
-//
-//        model.addAttribute("whiteList",objectMapper.writeValueAsString(allKeywordTitles));
-//        log.info("keyword="+objectMapper.writeValueAsString(allKeywordTitles));
+        List<ProjectType> projectTypeLists = projectTypeRepository.findAll();
+        log.info("projectTypeLists:"+projectTypeLists.size()+"명");
+
+
+        model.addAttribute("projectTypeLists",projectTypeLists);
+
+        //향후 수정 필요부분
+        //현재는 특정 사용자 고정
+        Account initiator = accountRepository.findByNickname("d11111");
+        model.addAttribute("initiator",initiator);
 
         return "project/form";
     }
@@ -62,8 +68,9 @@ public class ProjectController {
         if(errors.hasErrors()){
             return "project/form";
         }
+        log.info("[projectAI]projectForm.toString():"+projectForm.toString());
         Project newProject = projectService.createNewProject(modelMapper.map(projectForm,Project.class));
-
+        log.info("ID:"+newProject.getId());
         return "redirect:/project/"+newProject.getId()+"/outline";
     }
 
