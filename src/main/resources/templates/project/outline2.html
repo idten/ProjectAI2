@@ -18,9 +18,12 @@
             </div>
             <div class="row">
                 <h2 class="col-sm-12" >1. 개요</h2>
-                    <h3>- 사업명: <span th:text="${project.title}"></span></h3>
-                    <h3>- 발의부서: <span th:text="${project.department}"></span></h3>
-                    <h3>- 키워드: <span th:text="${project.keyword}"></span></h3>
+
+                <h3>- 사업명: 자금세탁방지 어쩌고 저쩌고 </h3>
+                <h3>- 발의부서: 자금세탁방지부 </h3>
+                <h3>- 키워드: xxx</h3>
+
+
                 <div>
                 <table id="example" class="display" style="width:100%">
                     <thead>
@@ -51,6 +54,12 @@
                 </table>
                 </div>
             </div>
+
+        </div>
+    </div>
+
+    <div class="row mt-5 justify-content-center">
+        <div class="col-12">
             <div class="row">
                 <h2 class="col-sm-4" >사업(현재 작성중)</h2>
                 <h2 class="col-sm-4" >참고사업</h2>
@@ -60,8 +69,9 @@
             <div class="row mt-3">
                 <form class="col-sm-4" action="#" th:action="@{/project/outline}" th:object="${outlineForm}"
                       method="post" novalidate>
+
                     <div class="form-group">
-                        <label for="title">사업명</label>
+                        <label for="title">항목1</label>
                         <input id="title" type="text" th:field="*{title}" th:placeholder="${project.title}" class="form-control"
                                th:value="${project.title}"
                                aria-describedby="bioHelp" disabled >
@@ -94,6 +104,7 @@
                             옳바른 URL이 아닙니다. 예시처럼 입력해 주세요.
                         </small>
                     </div>
+
                     <div class="form-group">
                         <label for="company">담당 EPMO</label>
                         <input id="company" type="text" th:field="*{epmo}" class="form-control"
@@ -102,6 +113,7 @@
                             개발자? 매니저? 취준생? 대표님?
                         </small>
                     </div>
+
                     <div class="form-group">
                         <label for="location">총금액(원)</label>
                         <input id="location" type="text" th:field="*{totalAmount}" class="form-control"
@@ -115,13 +127,14 @@
                         <button class="btn btn-primary btn-block" type="submit"
                                 aria-describedby="submitHelp">수정하기</button>
                     </div>
+
                 </form>
                 <form class="col-sm-4" action="#" th:action="@{/project/outline}" th:object="${outlineForm}"
                       method="post" novalidate>
 
                     <div class="form-group">
                         <label for="title">사업명</label>
-                        <input id="title" type="text" th:field="*{title}" class="col-sm-8 form-control"
+                        <input id="title" type="text" th:field="*{title}" class="form-control"
                                placeholder="사업명을 적어주세요" aria-describedby="bioHelp" required>
                         <small id="titleHelp" class="form-text text-muted">
                             사업명을 적어주세요
@@ -238,10 +251,10 @@
                     </div>
 
                 </form>
+
             </div>
         </div>
     </div>
-
 </div>
 <link href="/node_modules/cropper/dist/cropper.min.css" rel="stylesheet">
 <script src="/node_modules/cropper/dist/cropper.min.js" ></script>

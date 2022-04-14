@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org">
+<head th:replace="fragments.html :: head"></head>
+<body class="bg-light">
+<div th:replace="fragments.html :: main-nav"></div>
+<div class="container">
+    <div class="row mt-5 justify-content-center">
+        <div class="col-2">
+            <div th:replace="fragments.html :: settings-menu(currentMenu='outline')"></div>
+        </div>
+        <div class="col-8">
+            <div th:if="${message}" class="alert alert-info alert-dismissible fade show mt-3" role="alert">
+                <span th:text="${message}">메시지</span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="row">
+                <h2 class="col-sm-12" >1. 개요</h2>
+                    <h4>- 사업명: <span th:text="${project.title}"></span></h4>
+                    <h4>- 발의부서: <span th:text="${project.department}"></span></h4>
+                    <h4>- 발의자: <span th:text="${project.manager}"></span></h4>
+                    <h4>- EPMO: <span th:text="${project.epmo}"></span></h4>
+                    <h4>- 프로젝트 종류: <span th:text="${project.projectType}"></span></h4>
+                    <h4>- 키워드: <span th:text="${project.keyword}"></span></h4>
+                <div>
+                <table id="example" class="display" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th>도입물품</th>
+                        <th>수량</th>
+                        <th>단위</th>
+                        <th>금액</th>
+                        <th>유지보수요율</th>
+                        <th>등록일시</th>
+                        <th>상태</th>
+                        <th>연결</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>NAS 스토리지 1TB</td>
+                        <td>1</td>
+                        <td>식</td>
+                        <td>100,000,000원</td>
+                        <td>10%</td>
+                        <td>2022-03-17 18:00</td>
+                        <td>수정 중 </td>
+                        <td>
+                            <a type="button"   class="btn btn-sm btn-outline-primary" th:href="@{'/project/'+${project.id}+'/detail/1/detailProduct'}" >사업내용</a>
+                            <a type="button"   class="btn btn-sm btn-outline-primary" href="../detail/1/selectMethod">선정방법</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>SAN 스위치</td>
+                        <td>1</td>
+                        <td>식</td>
+                        <td>5,000,000원</td>
+                        <td>10%</td>
+                        <td>2022-03-17 18:00</td>
+                        <td>수정 중 </td>
+                        <td>
+                            <a type="button"   class="btn btn-sm btn-outline-primary" href="./detail/2/detailProduct">사업내용</a>
+                            <a type="button"   class="btn btn-sm btn-outline-primary" href="./detail/2/selectMethod">선정방법</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td>합계</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>105,000,000원</td>
+                        <td>-</td>
+                        <td>2022-03-17 18:00</td>
+                        <td>수정 중 </td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-outline-primary" href="./">상세</button>
+                            <button type="button" class="btn btn-sm btn-outline-primary">수정</button>
+                        </td>
+                    </tr>
+
+                    </tfoot>
+                </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<link href="/node_modules/cropper/dist/cropper.min.css" rel="stylesheet">
+<script src="/node_modules/cropper/dist/cropper.min.js" ></script>
+<script src="/node_modules/jquery-cropper/dist/jquery-cropper.min.js"></script>
+<script>
+    $(document).ready( function () {
+        $('#example').DataTable();
+    } );
+
+</script>
+</body>
+</html>

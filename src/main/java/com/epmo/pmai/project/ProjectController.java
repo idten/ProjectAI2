@@ -71,33 +71,53 @@ public class ProjectController {
         log.info("[projectAI]projectForm.toString():"+projectForm.toString());
         Project newProject = projectService.createNewProject(modelMapper.map(projectForm,Project.class));
         log.info("ID:"+newProject.getId());
-        return "redirect:/project/"+newProject.getId()+"/outline";
+        return "redirect:/project/"+newProject.getId()+"/detail";
     }
 
-    @GetMapping("/project/{id}/outline")
+    @GetMapping("/project/{id}/detail")
     public String outlineFormById(Model model,@PathVariable Long id) {
         //기본 입력페이지를 form으로 등록
+        //전달된 정보를 화면에 출력
         model.addAttribute("outlineForm",new OutlineForm());
         Project project = projectService.getProjectById(id);
         model.addAttribute("project",project);
+        log.info("[projectAI]projectForm.toString():"+project.getTitle());
 
-        return "project/outline";
+        return "project/detail";
     }
 
-    @GetMapping("/project/outline")
-    public String outlineForm(Model model) {
+    @GetMapping("/project/{id}/detail/{productId}/detailProduct")
+    public String outlineFormByIdandProductId(Model model,@PathVariable Long id) {
         //기본 입력페이지를 form으로 등록
+        //전달된 정보를 화면에 출력
         model.addAttribute("outlineForm",new OutlineForm());
-        return "project/outline";
+        Project project = projectService.getProjectById(id);
+        model.addAttribute("project",project);
+        log.info("[projectAI]projectForm.toString():"+project.getTitle());
+
+        return "project/detailProduct";
     }
 
-    @PostMapping("/project/outline")
+    @GetMapping("/project/{id}/detail/{productId}/selectMethod")
+    public String selectMethodByIdandProductId(Model model,@PathVariable Long id) {
+        //기본 입력페이지를 form으로 등록
+        //전달된 정보를 화면에 출력
+        model.addAttribute("outlineForm",new OutlineForm());
+        Project project = projectService.getProjectById(id);
+        model.addAttribute("project",project);
+        log.info("[projectAI]projectForm.toString():"+project.getTitle());
+
+        return "project/selectMethod";
+    }
+
+
+    @PostMapping("/project/detail")
     public String outlineSubmit(@Valid OutlineForm outlineForm, Errors errors){
         if(errors.hasErrors()){
-            return "project/outline";
+            return "project/detail";
         }
         Project newProject = projectService.createNewProject(modelMapper.map(outlineForm,Project.class));
-        return "redirect:/project/outline";
+        return "redirect:/project/detail";
     }
 
     //@GetMapping("/project/{id}/outline")

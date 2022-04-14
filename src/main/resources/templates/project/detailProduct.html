@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org">
+<head th:replace="fragments.html :: head"></head>
+<body class="bg-light">
+<div th:replace="fragments.html :: main-nav"></div>
+<div class="container">
+    <div class="row mt-5 justify-content-center">
+        <div class="col-2">
+            <div th:replace="fragments.html :: settings-menu(currentMenu='detail')"></div>
+        </div>
+        <div class="col-8">
+            <div th:if="${message}" class="alert alert-info alert-dismissible fade show mt-3" role="alert">
+                <span th:text="${message}">메시지</span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="row">
+                <h2 class="col-sm-12" >1. 개요</h2>
+                    <h4>- 사업명: <span th:text="${project.title}"></span></h4>
+                    <h4>- 발의부서: <span th:text="${project.department}"></span></h4>
+                    <h4>- 발의자: <span th:text="${project.manager}"></span></h4>
+                    <h4>- EPMO: <span th:text="${project.epmo}"></span></h4>
+                    <h4>- 프로젝트 종류: <span th:text="${project.projectType}"></span></h4>
+                    <h4>- 전결: <span>부서장 전결</span></h4>
+                    <h4>- 키워드: <span th:text="${project.keyword}"></span></h4>
+                    <hr>
+                <div>
+                <table id="example" class="display" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th>도입물품</th>
+                        <th>수량</th>
+                        <th>단위</th>
+                        <th>금액</th>
+                        <th>유지보수요율</th>
+                        <th>등록일시</th>
+                        <th>상태</th>
+                        <th>연결</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>NAS 스토리지 1TB</td>
+                        <td>1</td>
+                        <td>식</td>
+                        <td>100,000,000원</td>
+                        <td>10%</td>
+                        <td>2022-03-17 18:00</td>
+                        <td>수정 중 </td>
+                        <td>
+                            <a type="button"   class="btn btn-sm btn-outline-primary" href="./detail/2/detailProduct">사업내용</a>
+                            <a type="button"   class="btn btn-sm btn-outline-primary" href="./detail/2/selectMethod">선정방법</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>SAN 스위치</td>
+                        <td>1</td>
+                        <td>식</td>
+                        <td>5,000,000원</td>
+                        <td>10%</td>
+                        <td>2022-03-17 18:00</td>
+                        <td>수정 중 </td>
+                        <td>
+                            <a type="button"   class="btn btn-sm btn-outline-primary" href="./detail/2/detailProduct">사업내용</a>
+                            <a type="button"   class="btn btn-sm btn-outline-primary" href="./detail/2/selectMethod">선정방법</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>합계</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>105,000,000원</td>
+                        <td>-</td>
+                        <td>2022-03-17 18:00</td>
+                        <td>수정 중 </td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-outline-primary" href="./">상세</button>
+                            <button type="button" class="btn btn-sm btn-outline-primary">수정</button>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+                </div>
+            </div>
+            <hr>
+
+            <div class="row">
+                <h2 class="col-sm-6" >스토리지<button class="btn btn-outline-primary btn-sm">저장하기</button></h2>
+                <h2 class="col-sm-6" >사업명:XXXX</h2>
+            </div>
+            <div class="row mt-3">
+                <form class="col-sm-6" action="#" th:action="@{/project/outline}" th:object="${outlineForm}"
+                      method="post" novalidate>
+                    <div class="form-group">
+                        <label for="title">대상시스템<button class="btn btn-primary">가이드</button></label>
+                        <input id="title" type="text" th:field="*{title}" th:placeholder="${project.title}" class="form-control"
+                               th:value="${project.title}"
+                               aria-describedby="bioHelp" disabled >
+                        <small id="titleHelp" class="form-text text-muted">
+                            대상시스템명을 적어주세요
+                        </small>
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectType">도입방식</label>
+                        <input id="projectType" type="url" th:field="*{projectType}" class="form-control"
+                               placeholder="향후 콤보박스변환" aria-describedby="urlHelp" required>
+                        <small id="projectTypeHelp" class="form-text text-muted">
+                            신규/증설
+                        </small>
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('projectType')}" th:errors="*{url}">
+                            에러입니다
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectType">도입사유</label>
+                        <input id="projectType" type="url" th:field="*{projectType}" class="form-control"
+                               placeholder="향후 콤보박스변환" aria-describedby="urlHelp" required>
+                        <small id="projectTypeHelp" class="form-text text-muted">
+                            용량부족/EOS(발생 일시, 공문첨부), 시스템 신규, 기타
+                        </small>
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('projectType')}" th:errors="*{url}">
+                            에러입니다
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectType">현재 사용량</label>
+                        <input id="projectType" type="url" th:field="*{projectType}" class="form-control"
+                               placeholder="텍스트박스" aria-describedby="urlHelp" required>
+                        <small id="projectTypeHelp" class="form-text text-muted">
+                            신규/증설
+                        </small>
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('projectType')}" th:errors="*{url}">
+                            에러입니다
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectType">현재 용량</label>
+                        <input id="projectType" type="url" th:field="*{projectType}" class="form-control"
+                               placeholder="텍스트박스" aria-describedby="urlHelp" required>
+                        <small id="projectTypeHelp" class="form-text text-muted">
+                            신규/증설
+                        </small>
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('projectType')}" th:errors="*{url}">
+                            에러입니다
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectType">도입용량</label>
+                        <input id="projectType" type="url" th:field="*{projectType}" class="form-control"
+                               placeholder="텍스트박스" aria-describedby="urlHelp" required>
+                        <small id="projectTypeHelp" class="form-text text-muted">
+                            신규/증설
+                        </small>
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('projectType')}" th:errors="*{url}">
+                            에러입니다
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectType">용량산정 근기</label>
+                        <input id="projectType" type="url" th:field="*{projectType}" class="form-control"
+                               placeholder="텍스트박스" aria-describedby="urlHelp" required>
+                        <small id="projectTypeHelp" class="form-text text-muted">
+                            신규/증설
+                        </small>
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('projectType')}" th:errors="*{url}">
+                            에러입니다
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectType">도입방식</label>
+                        <input id="projectType" type="url" th:field="*{projectType}" class="form-control"
+                               placeholder="텍스트박스" aria-describedby="urlHelp" required>
+                        <small id="projectTypeHelp" class="form-text text-muted">
+                            동일기종(제품명)/이기종
+                        </small>
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('projectType')}" th:errors="*{url}">
+                            에러입니다
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectType">제품명(동일기종)</label>
+                        <input id="projectType" type="url" th:field="*{projectType}" class="form-control"
+                               placeholder="텍스트박스" aria-describedby="urlHelp" required>
+                        <small id="projectTypeHelp" class="form-text text-muted">
+                            신규/증설
+                        </small>
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('projectType')}" th:errors="*{url}">
+                            에러입니다
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="url">RACK 필요여부</label>
+                        <input id="url" type="url" th:field="*{manager}" class="form-control"
+                               placeholder="콤보박스" aria-describedby="urlHelp" required>
+                        <small id="urlHelp" class="form-text text-muted">
+                            Y / N
+                        </small>
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('projectType')}" th:errors="*{url}">
+                            에러
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">면진필요여부</label>
+                        <input id="company" type="text" th:field="*{epmo}" class="form-control"
+                               placeholder="면진필요여부" aria-describedby="occupationHelp" required>
+                        <small id="occupationHelp" class="form-text text-muted">
+                            Y / N
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">공급사양 조건(붙임)</label>
+                        <input id="location" type="text" th:field="*{totalAmount}" class="form-control"
+                               placeholder="공급조건"
+                               aria-describedby="locationdHelp" required>
+                        <small id="locationdHelp" class="form-text text-muted">
+                            공급사양 한글파일 첨부
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">판로지원법 대상</label>
+                        <input id="location" type="text" th:field="*{totalAmount}" class="form-control"
+                               placeholder="공급조건"
+                               aria-describedby="locationdHelp" required>
+                        <small id="locationdHelp" class="form-text text-muted">
+                            판로지원법 확인
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">긴급공고여부</label>
+                        <input id="company" type="text" th:field="*{epmo}" class="form-control"
+                               placeholder="여부" aria-describedby="occupationHelp" required>
+                        <small id="occupationHelp" class="form-text text-muted">
+                            Y / N
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">긴급공고여부</label>
+                        <input id="company" type="text" th:field="*{epmo}" class="form-control"
+                               placeholder="면진필요여부" aria-describedby="occupationHelp" required>
+                        <small id="occupationHelp" class="form-text text-muted">
+                            Y / N
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">통합발주여부</label>
+                        <input id="company" type="text" th:field="*{epmo}" class="form-control"
+                               placeholder="면진필요여부" aria-describedby="occupationHelp" required>
+                        <small id="occupationHelp" class="form-text text-muted">
+                            Y / N
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">기존장비 처리여부</label>
+                        <input id="company" type="text" th:field="*{epmo}" class="form-control"
+                               placeholder="면진필요여부" aria-describedby="occupationHelp" required>
+                        <small id="occupationHelp" class="form-text text-muted">
+                            Y / N
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">설치운영담당</label>
+                        <input id="company" type="text" th:field="*{epmo}" class="form-control"
+                               placeholder="면진필요여부" aria-describedby="occupationHelp" required>
+                        <small id="occupationHelp" class="form-text text-muted">
+                            지정
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">협조사항</label>
+                        <input id="company" type="text" th:field="*{epmo}" class="form-control"
+                               placeholder="면진필요여부" aria-describedby="occupationHelp" required>
+                        <small id="occupationHelp" class="form-text text-muted">
+                            향후 여러개
+                        </small>
+                    </div>
+
+
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block" type="submit"
+                                aria-describedby="submitHelp">수정하기</button>
+                    </div>
+                </form>
+                <form class="col-sm-6" action="#" th:action="@{/project/outline}" th:object="${outlineForm}"
+                      method="post" novalidate>
+
+                    <div class="form-group">
+                        <label for="title">사업명</label>
+                        <input id="title" type="text" th:field="*{title}" class="col-sm-8 form-control"
+                               placeholder="사업명을 적어주세요" aria-describedby="bioHelp" required>
+                        <small id="titleHelp" class="form-text text-muted">
+                            사업명을 적어주세요
+                        </small>
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
+                            조금 길어요.
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectType">사업종류</label>
+                        <input id="projectType" type="url" th:field="*{projectType}" class="form-control"
+                               placeholder="향후 콤보박스변환" aria-describedby="urlHelp" required>
+                        <small id="projectTypeHelp" class="form-text text-muted">
+                            물품/개발
+                        </small>
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('projectType')}" th:errors="*{url}">
+                            에러입니다
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="url">담당자</label>
+                        <input id="url" type="url" th:field="*{manager}" class="form-control"
+                               placeholder="향후 콤보박스변환" aria-describedby="urlHelp" required>
+                        <small id="urlHelp" class="form-text text-muted">
+                            물품/개발
+                        </small>
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('projectType')}" th:errors="*{url}">
+                            옳바른 URL이 아닙니다. 예시처럼 입력해 주세요.
+                        </small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="company">담당 EPMO</label>
+                        <input id="company" type="text" th:field="*{epmo}" class="form-control"
+                               placeholder="어떤 일을 하고 계신가요?" aria-describedby="occupationHelp" required>
+                        <small id="occupationHelp" class="form-text text-muted">
+                            개발자? 매니저? 취준생? 대표님?
+                        </small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">총금액(원)</label>
+                        <input id="location" type="text" th:field="*{totalAmount}" class="form-control"
+                               placeholder="금액입력"
+                               aria-describedby="locationdHelp" required>
+                        <small id="locationdHelp" class="form-text text-muted">
+                            주요 활동(사는 곳이나 직장을 다니는 곳 또는 놀러 다니는 곳) 지역의 도시 이름을 알려주세요.
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block" type="submit"
+                                aria-describedby="submitHelp">수정하기</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+<link href="/node_modules/cropper/dist/cropper.min.css" rel="stylesheet">
+<script src="/node_modules/cropper/dist/cropper.min.js" ></script>
+<script src="/node_modules/jquery-cropper/dist/jquery-cropper.min.js"></script>
+<script>
+    $(document).ready( function () {
+        $('#example').DataTable();
+    } );
+
+</script>
+</body>
+</html>

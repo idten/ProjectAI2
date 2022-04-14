@@ -1,6 +1,7 @@
 package com.epmo.pmai.project;
 
 
+import com.epmo.pmai.cooperation.Cooperation;
 import com.epmo.pmai.keyword.Keyword;
 import com.epmo.pmai.product.Product;
 import lombok.*;
@@ -71,6 +72,8 @@ public class Project {
     // 경비 총합
     private String expenseTotalAmount;
 
+    private String allTotalAmount;
+
     //도입내역
     @OneToMany
     private Set<Product> products;
@@ -86,8 +89,8 @@ public class Project {
     //소요시간
     private String duration;
 
-    //협조부서
-    private String cooperationDepartment;
+    @OneToMany
+    private Set<Cooperation> cooperations;
 
 
     ///////////5. 기타

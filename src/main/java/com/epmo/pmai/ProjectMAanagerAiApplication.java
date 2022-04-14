@@ -7,11 +7,16 @@ import com.epmo.pmai.config.ProjectTypeRepository;
 import com.epmo.pmai.keyword.Keyword;
 import com.epmo.pmai.keyword.KeywordRepository;
 import com.epmo.pmai.project.Project;
+import com.epmo.pmai.project.ProjectService;
+import com.epmo.pmai.project.form.ProjectForm;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import javax.validation.constraints.NotBlank;
 
 @SpringBootApplication
 public class ProjectMAanagerAiApplication {
@@ -19,6 +24,8 @@ public class ProjectMAanagerAiApplication {
     @Autowired AccountRepository accountRepository;
     @Autowired KeywordRepository keywordRepository;
     @Autowired ProjectTypeRepository projectTypeRepository;
+    @Autowired ProjectService projectService;
+
 
     public static void main(String[] args) {
         SpringApplication.run(ProjectMAanagerAiApplication.class, args);
@@ -27,16 +34,6 @@ public class ProjectMAanagerAiApplication {
     @Bean
     public ApplicationRunner applicationRunner2() {
         return args -> {
-//            private Long id;
-//            //email과 nickname으로 로그인 기능 제공할 예정이므로 unique
-//
-//            private String email;
-//
-//            private String password;
-//
-//            //EPMO, 계약, 검토자
-//            private String role;
-//
 
             //Project newProject = Project.builder().
             Account epmo1 = Account.builder().nickname("d23358")
@@ -78,14 +75,41 @@ public class ProjectMAanagerAiApplication {
             keywordRepository.save(keyword);
 
 
-            ProjectType projectType1 = ProjectType.builder().title("스토리지").build();
-            ProjectType projectType2 = ProjectType.builder().title("네트워크").build();
-            ProjectType projectType3 = ProjectType.builder().title("보안").build();
+            ProjectType projectType1 = ProjectType.builder()
+                    .id("storage").title("스토리지").build();
+            ProjectType projectType2 = ProjectType.builder()
+                    .id("network").title("네트워크").build();
+            ProjectType projectType3 = ProjectType.builder()
+                    .id("security").title("보안").build();
 
             projectTypeRepository.save(projectType1);
             projectTypeRepository.save(projectType2);
             projectTypeRepository.save(projectType3);
 
+//            private String title;
+//
+//            private String department;
+//            // 개발, 물품
+//            @NotBlank
+//            private String projectType;
+//
+//            private String epmo;
+//            //담당자
+//            private String manager;
+//
+//            private String keyword;
+//
+            //ModelMapper modelMapper = new ModelMapper();
+
+            Project initProject = Project.builder()
+                    .title("자금세탁방지시스템 스토리지 증설")
+                    .department("자금세탁방지부")
+                    .projectType("스토리지")
+                    .epmo("박현조")
+                    .manager("송태일")
+                    .keyword("자금세탁방지시스템, 스토리지, 증설")
+                    .build();
+            Project newProject = projectService.createNewProject(initProject);
 
         };
     }
